@@ -1,0 +1,18 @@
+.release:
+  stage: release
+  image:
+    name: registry.gitlab.com/gitlab-org/release-cli:latest
+    entrypoint: [""]
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: on_success
+    - when: never
+  script:
+    - echo "Releasing version ${VERSION}"
+  release:
+    name: 'Release ${VERSION}'
+    description: "[CHANGELOG.md](CHANGELOG.md#release-${VERSION})"
+    tag_name: "${VERSION}"
+    ref: "${CI_COMMIT_SHA}"
