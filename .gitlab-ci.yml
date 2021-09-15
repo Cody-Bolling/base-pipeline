@@ -1,0 +1,11 @@
+variables:
+  VERSION: 0.1
+
+include:
+  - local: /stages/release.yml
+
+stages:
+  - release
+
+Release:
+  extends: .release
