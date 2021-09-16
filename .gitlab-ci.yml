@@ -1,11 +1,15 @@
 variables:
-  VERSION: "0.4"
+  VERSION: "0.5"
 
 include:
   - local: /stages/release.yml
+  - local: /stages/save-repo-info.yml
 
 stages:
   - release
 
 Release:
   extends: .release
+
+Save Repo Info:
+  extends: .save-repo-info
