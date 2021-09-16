@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3
+
+- Fix build stage for aws ecr building and added variables
+
 ## 0.2
 
 - Fix authentication in build stage
