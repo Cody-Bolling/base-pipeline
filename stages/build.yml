@@ -18,5 +18,5 @@
     DOCKERFILE: "${CI_PROJECT_DIR}/dockerfile"
   script:
     - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"${REGISTRY_USERNAME}\",\"password\":\"${REGISTRY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
+    - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CONTEXT --dockerfile $DOCKERFILE --destination $REGISTRY/$REPOSITORY:$IMAGE_TAG
