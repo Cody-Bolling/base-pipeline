@@ -1,3 +1,5 @@
+# AWS Image Manifest Format: $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
 .build:
   stage: build
   image:
@@ -11,7 +13,10 @@
     - if: $CI_COMMIT_BRANCH == "main"
       when: on_success
     - when: never
+  variables:
+    CONTEXT: $CI_PROJECT_DIR
+    DOCKERFILE: "${CI_PROJECT_DIR}/dockerfile"
   script:
     - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"${AWS_ACCESS_KEY_ID}\",\"password\":\"${AWS_SECRET_ACCESS_KEY}\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/dockerfile --destination $REGISTRY/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+    - echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"${REGISTRY_USERNAME}\",\"password\":\"${REGISTRY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CONTEXT --dockerfile $DOCKERFILE --destination $REGISTRY/$REPOSITORY:$IMAGE_TAG
