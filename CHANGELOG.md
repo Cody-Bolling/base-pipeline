@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5
+
+- Add save-repo-info stage and repo-icon.png
+
 ## 0.4
 
 - Fix config.json to use AWS credstore
