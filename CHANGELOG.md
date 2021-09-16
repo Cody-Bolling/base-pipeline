@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4
+
+- Fix config.json to use AWS credstore
+
 ## 0.3
 
 - Fix build stage for aws ecr building and added variables
