@@ -15,6 +15,6 @@
     - echo "Releasing version ${VERSION}"
   release:
     name: 'Release ${VERSION}'
-    description: "[CHANGELOG.md](CHANGELOG.md#release-${VERSION})"
+    description: "[CHANGELOG.md](CHANGELOG.md)"
     tag_name: "${VERSION}"
     ref: "${CI_COMMIT_SHA}"
