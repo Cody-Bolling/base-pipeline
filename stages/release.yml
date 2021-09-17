@@ -1,20 +1,32 @@
+# Release Job
+#
+# Creates a release in Gitlab for the newest version and also saves the current
+# repository's information into the table 'git-repos' in AWS DynamoDB.
+# The information saved into AWS is the slug, title, url, latest version, and link to the icon.
+
 .release:
   stage: release
   image:
-    name: registry.gitlab.com/gitlab-org/release-cli:latest
+    name: public.ecr.aws/b9b5m9f7/base-images:cicd-toolkit_0.2
     entrypoint: [""]
   rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CI_COMMIT_TAG
-      when: never
     - if: $CI_COMMIT_BRANCH == "main"
       when: on_success
     - when: never
+  variables:
+    AWS_REPO_TABLE_NAME: git-repos
+    ICON_URL: "${CI_PROJECT_URL}/raw/main/repo-icon.png"
+    ITEM: "{\"slug\": {\"S\": \"${CI_PROJECT_NAME}\"}, \"title\": {\"S\": \"${CI_PROJECT_TITLE}\"}, \"url\": {\"S\": \"${CI_PROJECT_URL}\"}, \"version\": {\"S\": \"${VERSION}\"}, \"icon\": {\"S\": \"${ICON_URL}\"}}"
+  before_script:
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+    - aws configure set output json
   script:
     - echo "Releasing version ${VERSION}"
+    - aws dynamodb put-item --table-name $AWS_REPO_TABLE_NAME --item "$ITEM"
   release:
     name: 'Release ${VERSION}'
-    description: "[CHANGELOG.md](CHANGELOG.md#release-${VERSION})"
+    description: "[CHANGELOG.md](CHANGELOG.md)"
     tag_name: "${VERSION}"
     ref: "${CI_COMMIT_SHA}"
