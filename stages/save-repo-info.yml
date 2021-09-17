@@ -27,4 +27,4 @@
     - aws configure set output json
   script:
     - echo $ITEM
-    - aws dynamodb put-item --table-name $AWS_REPO_TABLE_NAME --item $ITEM
+    - aws dynamodb put-item --table-name $AWS_REPO_TABLE_NAME --item '$ITEM'
