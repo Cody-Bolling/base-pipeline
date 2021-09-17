@@ -19,7 +19,7 @@
   variables:
     AWS_REPO_TABLE_NAME: git-repos
     ICON_URL: "${CI_PROJECT_URL}/raw/main/repo-icon.png"
-    ITEM: "'{\"slug\": {\"S\": \"${CI_PROJECT_NAME}\"}, \"title\": {\"S\": \"${CI_PROJECT_TITLE}\"}, \"url\": {\"S\": \"${CI_PROJECT_URL}\"}, \"version\": {\"S\": \"${VERSION}\"}, \"icon\": {\"S\": \"${ICON_URL}\"}}'"
+    ITEM: "'{\"slug\":{\"S\":\"${CI_PROJECT_NAME}\"},\"title\":{\"S\":\"${CI_PROJECT_TITLE}\"},\"url\":{\"S\":\"${CI_PROJECT_URL}\"},\"version\":{\"S\":\"${VERSION}\"},\"icon\":{\"S\":\"${ICON_URL}\"}}'"
   before_script:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
