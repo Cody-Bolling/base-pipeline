@@ -26,7 +26,5 @@
     - aws configure set region ${AWS_DEFAULT_REGION}
     - aws configure set output json
   script:
-    - |
-      aws dynamodb put-item \
-      --table-name ${AWS_REPO_TABLE_NAME} \
-      --item ${ITEM}
+    - echo $ITEM
+    - aws dynamodb put-item --table-name $AWS_REPO_TABLE_NAME --item $ITEM
