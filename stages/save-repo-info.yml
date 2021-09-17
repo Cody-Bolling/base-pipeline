@@ -13,7 +13,7 @@
       when: never
     - if: $CI_COMMIT_TAG
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_BRANCH == "main"
       when: on_success
     - when: never
   variables:
@@ -26,5 +26,4 @@
     - aws configure set region $AWS_DEFAULT_REGION
     - aws configure set output json
   script:
-    - echo $ITEM
     - aws dynamodb put-item --table-name $AWS_REPO_TABLE_NAME --item "$ITEM"
