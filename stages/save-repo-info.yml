@@ -25,4 +25,4 @@
     - aws configure set region ${AWS_DEFAULT_REGION}
     - aws configure set output json
   script:
-    - aws dynamodb put-item --table-name ${AWS_REPOO_TABLE_NAME} --item {\"slug\":{\"S\":\"${CI_PROJECT_NAME}\"},\"title\":{\"S\":\"${CI_PROJECT_TITLE}\"},\"url\":{\"S\":\"${CI_PROJECT_URL}\"},\"version\":{\"S\":\"${VERSION}\"},\"icon\":{\"S\":\"${ICON_URL}\"}}
+    - aws dynamodb put-item --table-name ${AWS_REPO_TABLE_NAME} --item {\"slug\":{\"S\":\"${CI_PROJECT_NAME}\"},\"title\":{\"S\":\"${CI_PROJECT_TITLE}\"},\"url\":{\"S\":\"${CI_PROJECT_URL}\"},\"version\":{\"S\":\"${VERSION}\"},\"icon\":{\"S\":\"${ICON_URL}\"}}
