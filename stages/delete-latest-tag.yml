@@ -1,0 +1,21 @@
+# Delete Latest Tag Job
+#
+# Deletes the 'latest' tag from a given repository in AWS ECR.
+# This job should be ran before the build.yml job.
+
+.delete-latest-tag:
+  stage: pre-build
+  image:
+    name: public.ecr.aws/b9b5m9f7/base-images:cicd-toolkit_0.2
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: on_success
+    - when: never
+  before_script:
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+    - aws configure set output json
+  script:
+    - aws ecr-public batch-delete-image --repository-name $REPOSITORY --image-ids imageTag=latest

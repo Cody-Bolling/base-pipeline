@@ -1,7 +1,7 @@
 # Build Image Job
 #
 # Builds and image to AWS ECR given the registry, repository, and image tag.
-# Will build the image to the 'latest' tag so the delete-latest-tag job should be run
+# Will build the image to the 'latest' tag so the delete-latest-tag.yml job should be run
 # in a pre-build stage before this.
 
 .build:
