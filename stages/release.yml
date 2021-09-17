@@ -7,7 +7,7 @@
 .release:
   stage: release
   image:
-    name: public.ecr.aws/b9b5m9f7/base-images:cicd-toolkit_0.2
+    name: public.ecr.aws/b9b5m9f7/cicd-toolkit:latest
     entrypoint: [""]
   rules:
     - if: $CI_COMMIT_BRANCH == "main"

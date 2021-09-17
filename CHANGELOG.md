@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7
+
+- Update release and delete-latest-tag jopbs to use cicd-toolkit:latest image
+
 ## 0.6
 
 - combine the save-repo-info job into the release job, add delete-latest-tag job, update rulesets and documentation for all stages
