@@ -1,4 +1,8 @@
-# AWS Image Manifest Format: $REGISTRY/$REPOSITORY:$IMAGE_TAG
+# Build Image Job
+#
+# Builds and image to AWS ECR given the registry, repository, and image tag.
+# Will build the image to the 'latest' tag so the delete-latest-tag job should be run
+# in a pre-build stage before this.
 
 .build:
   stage: build
@@ -19,4 +23,4 @@
   script:
     - mkdir -p /kaniko/.docker
     - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CONTEXT --dockerfile $DOCKERFILE --destination $REGISTRY/$REPOSITORY:${IMAGE_NAME}_${TAG}
+    - /kaniko/executor --context $CONTEXT --dockerfile $DOCKERFILE --destination $REGISTRY/$REPOSITORY:${TAG}
